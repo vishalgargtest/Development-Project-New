@@ -24,11 +24,11 @@ namespace Sparcpoint.BusinessLayer.Product
             //InstanceId to be made common to avoid foreign key violation
             productEntity.Attributes.ToList().ForEach(x => x.InstanceId = productEntity.InstanceId);
             productEntity.Categories.ToList().ForEach(x => x.InstanceId = productEntity.InstanceId);
-            var productAdded = await _productRepository.AddProduct(productEntity).ConfigureAwait(false);
+            var productAdded = await _productRepository.AddProduct(productEntity);
             return productAdded;
         }
         public async Task<List<Products>> SearchProduct(FilterModel filterModel) {
-            var productFiltered = await _productRepository.SearchProduct(filterModel).ConfigureAwait(false);
+            var productFiltered = await _productRepository.SearchProduct(filterModel);
             return productFiltered;
         }
     }

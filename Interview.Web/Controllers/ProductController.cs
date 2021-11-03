@@ -18,7 +18,7 @@ namespace Interview.Web.Controllers
         private readonly IDataSerializer _serialize;
         public ProductController(IProductManager productManager, IDataSerializer serialize)
         {
-            //Dependency Injection - Startup Class
+            //Dependency Injection - Configured Startup Class
             _productManager = productManager;
             _serialize = serialize;
         }
@@ -26,7 +26,7 @@ namespace Interview.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> AddProducts([FromBody] ProductDto product)
         {
-            var productList = await _productManager.AddProduct(ProductEntityMapper.MapDTOtoDomain(product)).ConfigureAwait(false);
+            var productList = await _productManager.AddProduct(ProductEntityMapper.MapDTOtoDomain(product));
             return (IActionResult)Ok(_serialize.Serialize<Products>(productList));
         }
         [HttpGet]
@@ -41,7 +41,7 @@ namespace Interview.Web.Controllers
                 ValidSkus = validSkusGuid,
                 Category = category
             };
-            var productList = await _productManager.SearchProduct(product).ConfigureAwait(false);
+            var productList = await _productManager.SearchProduct(product);
             return (IActionResult)Ok(_serialize.Serialize<List<Products>>(productList));
         }
 
