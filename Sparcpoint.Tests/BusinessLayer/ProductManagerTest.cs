@@ -21,7 +21,7 @@ namespace Sparcpoint.Tests
             ProductDto productDto = Substitute.For<ProductDto>();
             ProductManager productManager = new ProductManager(productRepository);
             productRepository.AddProduct(Arg.Any<Products>()).Returns(new Products() {Description = "Test Product",Name = "Test" });
-            var result  = await productManager.AddProduct(ProductEntityMapper.MapDTOtoDomain(productDto)).ConfigureAwait(false);
+            var result  = await productManager.AddProduct(ProductEntityMapper.MapDTOtoDomain(productDto));
             Assert.IsNotNull(result);
         }
     }

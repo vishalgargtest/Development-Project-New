@@ -24,7 +24,7 @@ namespace Sparcpoint.DataLayer.Repository
         public async Task<Products> AddProduct(Products product)
         {
             _context.Products.Add(product);
-            await _context.SaveChangesAsync().ConfigureAwait(false);
+            await _context.SaveChangesAsync();
             return product;
         }
 
